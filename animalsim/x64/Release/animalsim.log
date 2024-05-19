@@ -1,0 +1,23 @@
+﻿  animalsim.cpp
+C:\Users\under\source\repos\animalsim\include\raylib.h(1421,38): warning C4190: 'ColorToHSV' has C-linkage specified, but returns UDT 'Vector3' which is incompatible with C
+  (compiling source file 'animalsim.cpp')
+  C:\Users\under\source\repos\animalsim\include\raylib.h(220,16):
+  see declaration of 'Vector3'
+  
+C:\Users\under\source\repos\animalsim\include\raylib.h(1531,51): warning C4190: 'GetModelBoundingBox' has C-linkage specified, but returns UDT 'BoundingBox' which is incompatible with C
+  (compiling source file 'animalsim.cpp')
+  C:\Users\under\source\repos\animalsim\include\raylib.h(444,16):
+  see declaration of 'BoundingBox'
+  
+C:\Users\under\source\repos\animalsim\include\raylib.h(1550,48): warning C4190: 'GetMeshBoundingBox' has C-linkage specified, but returns UDT 'BoundingBox' which is incompatible with C
+  (compiling source file 'animalsim.cpp')
+  C:\Users\under\source\repos\animalsim\include\raylib.h(444,16):
+  see declaration of 'BoundingBox'
+  
+C:\Users\under\source\repos\animalsim\animalsim.cpp(98,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\under\source\repos\animalsim\animalsim.cpp(198,16): error C2660: 'Default': function does not take 2 arguments
+  C:\Users\under\source\repos\animalsim\animalsim.cpp(72,15):
+  see declaration of 'Default'
+  C:\Users\under\source\repos\animalsim\animalsim.cpp(198,16):
+  while trying to match the argument list '(int, Vector2)'
+  
