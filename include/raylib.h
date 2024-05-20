@@ -253,6 +253,16 @@ typedef struct Color {
     unsigned char a;        // Color alpha value
 } Color;
 
+Color newColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+{
+    Color col;
+    col.r = r;
+    col.g = g;
+    col.b = b;
+    col.a = a;
+    return col;
+}
+
 // Rectangle, 4 components
 typedef struct Rectangle {
     float x;                // Rectangle top-left corner position x

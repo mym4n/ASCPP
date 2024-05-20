@@ -2,7 +2,8 @@
 #include <filesystem>
 #include <raylib.h>
 
-#include <animal.h>
+#include <entity.h>
+#include <sim.h>
 
 #define MAXANIMAL_AMOUNT = 255
 #define WINDOW_WIDTH 1280
@@ -30,7 +31,9 @@ Vector2 sqrdist(Vector2 x1, Vector2 x2)
 int main() // MSVC is complaining about how much stack memory I'm using WAAAH WAAH WAAAH
 {
 	//std::filesystem::path sixtyfour = ;
-	std::cout << "f:" << std::filesystem::absolute("/Assets/sprites/dev/64px.png").generic_string() << "\n";
+	//std::cout << "f:" << std::filesystem::absolute("/Assets/sprites/dev/64px.png").generic_string() << "\n";
+
+	test();
 
 	const int * randomseed = new int{ 5534 };
 	srand(*randomseed);
@@ -45,23 +48,25 @@ int main() // MSVC is complaining about how much stack memory I'm using WAAAH WA
 	RenderTexture2D gameImage = LoadRenderTexture(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 
 	Vector2 mousepos; //Vector2(0, 0);
-	Animal* animals;
+	Entity* animals = new Entity[255]();
 
 	SetTargetFPS(60);
 
 	while (!WindowShouldClose())
 	{
+		// assign mouse position
+		mousepos = GetMousePosition();
 
 		// clear both textures
 		BeginTextureMode(gameImage);
 		ClearBackground(BLACK);
+		//ClearBackground(newColor(mousepos.x, mousepos.y, mousepos.x, 255));
 		EndTextureMode();
 		BeginTextureMode(gameImage_back);
 		ClearBackground(BLACK);
+		//ClearBackground(newColor(mousepos.x, mousepos.y, mousepos.x, 255));
 		EndTextureMode();
 
-		// assign mouse position
-		mousepos = GetMousePosition();
 
 		// flip game texture
 		BeginTextureMode(gameImage_back);
@@ -85,6 +90,7 @@ int main() // MSVC is complaining about how much stack memory I'm using WAAAH WA
 
 	UnloadRenderTexture(gameImage);
 	UnloadRenderTexture(gameImage_back);
+	delete[] animals;
 
 	CloseWindow();
 }
