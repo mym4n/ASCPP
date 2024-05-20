@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{C947B603-B171-4CC3-8BED-4129B024C63E}|animalsim.vcxproj|C:\\Users\\under\\source\\repos\\animalsim\\animalsim.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C947B603-B171-4CC3-8BED-4129B024C63E}|animalsim.vcxproj|solutionrelative:animalsim.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C947B603-B171-4CC3-8BED-4129B024C63E}|animalsim.vcxproj|C:\\USERS\\UNDER\\SOURCE\\REPOS\\ANIMALSIM\\INCLUDE\\ANIMAL.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C947B603-B171-4CC3-8BED-4129B024C63E}|animalsim.vcxproj|solutionrelative:INCLUDE\\ANIMAL.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "animal.h",
+              "DocumentMoniker": "C:\\Users\\under\\source\\repos\\animalsim\\include\\animal.h",
+              "RelativeDocumentMoniker": "include\\animal.h",
+              "ToolTip": "C:\\Users\\under\\source\\repos\\animalsim\\include\\animal.h",
+              "RelativeToolTip": "include\\animal.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-20T02:17:16.123Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +41,7 @@
               "RelativeDocumentMoniker": "animalsim.cpp",
               "ToolTip": "C:\\Users\\under\\source\\repos\\animalsim\\animalsim.cpp",
               "RelativeToolTip": "animalsim.cpp",
-              "ViewState": "AQIAAAYBAAAAAAAAAAAAABYBAACqAAAA",
+              "ViewState": "AQIAAMEAAAAAAAAAAAAAANYAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-18T22:47:06.843Z",
               "EditorCaption": ""

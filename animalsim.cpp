@@ -5,8 +5,11 @@
 #include <animal.h>
 
 #define maxanimalAmount = 255
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 480
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 960
+
+#define VIEWPORT_WIDTH 640
+#define VIEWPORT_HEIGHT 480
 
 float deltaTime = 1.0f;
 
@@ -54,7 +57,10 @@ Texture2D spriteTexture_default; //= LoadTexture("C:\\Users\\under\\source\\repo
 Rectangle spriteRectangle_default; //= {0, 0, spriteTexture_default.width, spriteTexture_default.height};
 
 const int funcid_default = 0;
-const int funcid_fox = 1;
+const int funcid_sf = 1;
+const int funcid_tt = 2;
+const int funcid_st = 3;
+const int funcid_fox = 4;
 
 
 
@@ -85,7 +91,7 @@ static Animal Default(int ID, Vector2 position, Texture2D texture)
 	BoundingBox Default = BoundingBox(Vector3(-5, -5), Vector3(5, 5));
 
 	Animal df = Animal(ID, position, Default, Default, 100, 10, true);
-	df.sprite = texture;
+	df.spriteid = funcid_default;
 	df.updatefuncid = funcid_default;
 	df.type = 0;
 	return df;
@@ -96,7 +102,7 @@ static Animal Fox(int ID, Vector2 position, Texture2D texture)
 	BoundingBox Default = BoundingBox(Vector3(-5, -5), Vector3(5, 5));
 
 	Animal df = Animal(ID, position, Default, Default, 100, 10, true);
-	df.sprite = texture;
+	df.spriteid = funcid_fox;
 	df.updatefuncid = funcid_default;
 	df.type = 1;
 	return df;
@@ -201,7 +207,19 @@ void RenderAnimal(Animal animal)
 {
 	//BeginTextureMode(rendertexture);
 
-	DrawTextureRec(animal.sprite, spriteRectangle_default, animal.position, WHITE);
+	switch (animal.spriteid)
+	{
+		case funcid_default:
+			DrawTextureRec(spriteTexture_default, spriteRectangle_default, animal.position, WHITE);
+			break;
+		case funcid_sf:
+			break;
+		case funcid_tt:
+			break;
+		case funcid_st:
+			break;
+	}
+
 
 	//EndTextureMode();
 }
@@ -225,7 +243,7 @@ void AnimalSimMode(Animal animals[255], RenderTexture2D gameImage)
 	// target the rendertexture "gameImage"
 	BeginTextureMode(gameImage);
 
-	ClearBackground(BLACK);
+	//ClearBackground(BLACK);
 	RenderAnimals(animals);
 
 	EndTextureMode();
@@ -246,12 +264,21 @@ void AnimalSimMode(Animal animals[255], RenderTexture2D gameImage)
 
 
 
-
+Texture2D SixtyFourPX;
+Texture2D ThirtyTwoPX;
+Texture2D SixteenPX;
 
 //testing updatefunction
 //--------------------------------------------------------------------------------------//
 void TestUpdateMode(Animal animals[255], RenderTexture2D gameImage)
 {
+	BeginTextureMode(gameImage);
+
+	DrawTexture(SixtyFourPX, 0, 0, WHITE);
+	DrawTexture(ThirtyTwoPX, 64, 0, WHITE);
+	DrawTexture(SixteenPX, 96, 0, WHITE);
+
+	EndTextureMode();
 }
 
 //operating mode codes
@@ -274,11 +301,16 @@ int main()
 
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "AnimalSim");
 
-
 	// load all textures
 	spriteTexture_default = LoadTexture("C:\\Users\\under\\source\\repos\\animalsim\\x64\\Debug\\Assets\\fop.png"); // HARDCODED!!! CHANGE THIS WHEN YOU FIGURE IT OUT LOL!!!
 	spriteRectangle_default = {0, 0, (float)spriteTexture_default.width, -(float)spriteTexture_default.height};
-	RenderTexture2D gameImage = LoadRenderTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	SixtyFourPX = LoadTexture("C:\\Users\\under\\source\\repos\\animalsim\\x64\\Debug\\Assets\\sprites\\dev\\64px.png");
+	ThirtyTwoPX = LoadTexture("C:\\Users\\under\\source\\repos\\animalsim\\x64\\Debug\\Assets\\sprites\\dev\\32px.png");
+	SixteenPX = LoadTexture("C:\\Users\\under\\source\\repos\\animalsim\\x64\\Debug\\Assets\\sprites\\dev\\16px.png");
+
+	RenderTexture2D gameImage_back = LoadRenderTexture(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+	RenderTexture2D gameImage = LoadRenderTexture(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 
 	Vector2 mousepos; //Vector2(0, 0);
 	Vector2 temp;
@@ -293,12 +325,20 @@ int main()
 	}
 
 	// set the different operating modes
-	int operatingMode = OPmode_animal_sim;
+	int operatingMode = OPmode_testing;
 	int random = 0;
 	SetTargetFPS(60);
 
 	while (!WindowShouldClose())
 	{
+
+		// clear both textures
+		BeginTextureMode(gameImage);
+		ClearBackground(BLACK);
+		EndTextureMode();
+		BeginTextureMode(gameImage_back);
+		ClearBackground(BLACK);
+		EndTextureMode();
 
 		// assign mouse position
 		mousepos = GetMousePosition();
@@ -316,10 +356,15 @@ int main()
 				break;
 		}
 
+		// flip game texture
+		BeginTextureMode(gameImage_back);
+		DrawTextureRec(gameImage.texture, { 0, 0, (float)gameImage.texture.width, (float)gameImage.texture.height }, {0, 0}, WHITE);
+		EndTextureMode();
+
 		// begin drawing to the window
 		BeginDrawing();
 		ClearBackground(BLACK);
-		DrawTexture(gameImage.texture, 0, 0, WHITE);
+		DrawTextureEx(gameImage_back.texture, {0, 0}, 0, 2, WHITE);
 
 		DrawCircle(GetMouseX(), GetMouseY(), 3, RED);
 

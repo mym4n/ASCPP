@@ -5,7 +5,7 @@ public:
 	int id;
 	int type;
 
-	Texture2D sprite;
+	int spriteid;
 
 	Vector2 position;
 	float mass;
