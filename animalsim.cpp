@@ -294,13 +294,14 @@ const int OPmode_testing = 1;
 
 //main function
 //--------------------------------------------------------------------------------------//
-int main()
+int main() // MSVC is complaining about how much stack memory I'm using WAAAH WAAH WAAAH
 {
 	//std::filesystem::path sixtyfour = ;
 	std::cout << "f:" << std::filesystem::absolute("/Assets/sprites/dev/64px.png").generic_string() << "\n";
 
-	const int randomseed = 5534;
-	srand(randomseed);
+	const int * randomseed = new int{ 5534 };
+	srand(*randomseed);
+	delete randomseed;
 
 	//const int screenWidth = 640;
 	//const int screenHeight = 480;
@@ -320,9 +321,6 @@ int main()
 	RenderTexture2D gameImage = LoadRenderTexture(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 
 	Vector2 mousepos; //Vector2(0, 0);
-	Vector2 temp;
-	temp.x = 200;
-	temp.y = 200;
 	Animal animals[255] = {};
 
 	for (int i = 0; i < 255; i++)
