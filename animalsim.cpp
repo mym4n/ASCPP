@@ -54,7 +54,7 @@ Sound Entity_Fox_Yip;
 // ANIMAL TEXTURES
 //--------------------------------------------------------------------------------------//
 Texture2D spriteTexture_default; //= LoadTexture("C:\\Users\\under\\source\\repos\\animalsim\\x64\\Debug\\Assets\\fop.png");
-Rectangle spriteRectangle_default; //= {0, 0, spriteTexture_default.width, spriteTexture_default.height};
+//Rectangle spriteRectangle_default; //= {0, 0, spriteTexture_default.width, spriteTexture_default.height};
 
 const int funcid_default = 0;
 const int funcid_sf = 1;
@@ -213,7 +213,7 @@ void RenderAnimal(Animal animal)
 	switch (animal.spriteid)
 	{
 		case funcid_default:
-			DrawTextureRec(spriteTexture_default, spriteRectangle_default, animal.position, WHITE);
+			DrawTextureRec(spriteTexture_default, {0, 0, (float)spriteTexture_default.width, (float)spriteTexture_default.height}, animal.position, WHITE);
 			break;
 		case funcid_sf:
 			DrawTextureRec(SixtyFourPX, {0, 0, (float)SixtyFourPX.width, (float)SixtyFourPX.height}, animal.position, WHITE);
@@ -296,6 +296,9 @@ const int OPmode_testing = 1;
 //--------------------------------------------------------------------------------------//
 int main()
 {
+	//std::filesystem::path sixtyfour = ;
+	std::cout << "f:" << std::filesystem::absolute("/Assets/sprites/dev/64px.png").generic_string() << "\n";
+
 	const int randomseed = 5534;
 	srand(randomseed);
 
@@ -305,12 +308,13 @@ int main()
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "AnimalSim");
 
 	// load all textures
-	spriteTexture_default = LoadTexture("C:\\Users\\under\\source\\repos\\animalsim\\x64\\Debug\\Assets\\fop.png"); // HARDCODED!!! CHANGE THIS WHEN YOU FIGURE IT OUT LOL!!!
-	spriteRectangle_default = {0, 0, (float)spriteTexture_default.width, -(float)spriteTexture_default.height};
 
-	SixtyFourPX = LoadTexture("C:\\Users\\under\\source\\repos\\animalsim\\x64\\Debug\\Assets\\sprites\\dev\\64px.png");
-	ThirtyTwoPX = LoadTexture("C:\\Users\\under\\source\\repos\\animalsim\\x64\\Debug\\Assets\\sprites\\dev\\32px.png");
-	SixteenPX = LoadTexture("C:\\Users\\under\\source\\repos\\animalsim\\x64\\Debug\\Assets\\sprites\\dev\\16px.png");
+	spriteTexture_default = LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\fop.png").generic_string().c_str()); // HARDCODED!!! CHANGE THIS WHEN YOU FIGURE IT OUT LOL!!!
+	//spriteRectangle_default = {0, 0, (float)spriteTexture_default.width, -(float)spriteTexture_default.height};
+
+	SixtyFourPX = LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\sprites\\dev\\64px.png").generic_string().c_str());
+	ThirtyTwoPX = LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\sprites\\dev\\32px.png").generic_string().c_str());
+	SixteenPX = LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\sprites\\dev\\16px.png").generic_string().c_str());
 
 	RenderTexture2D gameImage_back = LoadRenderTexture(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 	RenderTexture2D gameImage = LoadRenderTexture(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);

@@ -1,0 +1,9 @@
+﻿  animalsim.cpp
+C:\Users\under\source\repos\ASCPP\include\raylib.h(1421,38): warning C4190: 'ColorToHSV' has C-linkage specified, but returns UDT 'Vector3' which is incompatible with C
+C:\Users\under\source\repos\ASCPP\include\raylib.h(220,16): message : see declaration of 'Vector3'
+C:\Users\under\source\repos\ASCPP\include\raylib.h(1531,51): warning C4190: 'GetModelBoundingBox' has C-linkage specified, but returns UDT 'BoundingBox' which is incompatible with C
+C:\Users\under\source\repos\ASCPP\include\raylib.h(444,16): message : see declaration of 'BoundingBox'
+C:\Users\under\source\repos\ASCPP\include\raylib.h(1550,48): warning C4190: 'GetMeshBoundingBox' has C-linkage specified, but returns UDT 'BoundingBox' which is incompatible with C
+C:\Users\under\source\repos\ASCPP\include\raylib.h(444,16): message : see declaration of 'BoundingBox'
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(133,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+  animalsim.vcxproj -> C:\Users\under\source\repos\ASCPP\x64\Debug\animalsim.exe
