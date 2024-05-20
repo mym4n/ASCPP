@@ -201,6 +201,9 @@ void UpdateAnimals(Animal animals[255])
 
 
 
+Texture2D SixtyFourPX;
+Texture2D ThirtyTwoPX;
+Texture2D SixteenPX;
 
 // use in the texturemode
 void RenderAnimal(Animal animal)
@@ -213,10 +216,13 @@ void RenderAnimal(Animal animal)
 			DrawTextureRec(spriteTexture_default, spriteRectangle_default, animal.position, WHITE);
 			break;
 		case funcid_sf:
+			DrawTextureRec(SixtyFourPX, {0, 0, (float)SixtyFourPX.width, (float)SixtyFourPX.height}, animal.position, WHITE);
 			break;
 		case funcid_tt:
+			DrawTextureRec(ThirtyTwoPX, {0, 0, (float)ThirtyTwoPX.width, (float)ThirtyTwoPX.height}, animal.position, WHITE);
 			break;
 		case funcid_st:
+			DrawTextureRec(SixteenPX, {0, 0, (float)SixteenPX.width, (float)SixteenPX.height}, animal.position, WHITE);
 			break;
 	}
 
@@ -264,9 +270,6 @@ void AnimalSimMode(Animal animals[255], RenderTexture2D gameImage)
 
 
 
-Texture2D SixtyFourPX;
-Texture2D ThirtyTwoPX;
-Texture2D SixteenPX;
 
 //testing updatefunction
 //--------------------------------------------------------------------------------------//
@@ -322,10 +325,11 @@ int main()
 	{
 		animals[i] = Default(i,newVec2((float)rand() / (float)RAND_MAX * (float)WINDOW_WIDTH,
 									 (float)rand() / (float)RAND_MAX * (float)WINDOW_HEIGHT), spriteTexture_default);
+		animals[i].spriteid = funcid_tt;
 	}
 
 	// set the different operating modes
-	int operatingMode = OPmode_testing;
+	int operatingMode = OPmode_animal_sim;
 	int random = 0;
 	SetTargetFPS(60);
 

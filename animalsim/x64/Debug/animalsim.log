@@ -14,5 +14,5 @@ C:\Users\under\source\repos\animalsim\include\raylib.h(1550,48): warning C4190: 
   C:\Users\under\source\repos\animalsim\include\raylib.h(444,16):
   see declaration of 'BoundingBox'
   
-C:\Users\under\source\repos\animalsim\animalsim.cpp(130,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\under\source\repos\animalsim\animalsim.cpp(133,25): warning C4305: 'initializing': truncation from 'double' to 'float'
   animalsim.vcxproj -> C:\Users\under\source\repos\animalsim\x64\Debug\animalsim.exe
