@@ -7,4 +7,6 @@ extern void ResolveUpdateFunctionID(Entity entity);
 
 extern void CallUpdateFunctions(Entity entities[]);
 
-void test();
+extern void RenderEntity(Entity entity);
+
+extern void RenderEntities(Entity entites[]);

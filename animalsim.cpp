@@ -30,10 +30,6 @@ Vector2 sqrdist(Vector2 x1, Vector2 x2)
 //--------------------------------------------------------------------------------------//
 int main() // MSVC is complaining about how much stack memory I'm using WAAAH WAAH WAAAH
 {
-	//std::filesystem::path sixtyfour = ;
-	//std::cout << "f:" << std::filesystem::absolute("/Assets/sprites/dev/64px.png").generic_string() << "\n";
-
-	test();
 
 	const int * randomseed = new int{ 5534 };
 	srand(*randomseed);
