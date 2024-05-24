@@ -20,6 +20,5 @@ public:
 const unsigned char EntityID_Default = 0;
 const unsigned char EntityID_Fox = 1;
 
-
-const Texture2D EntityTexture_Default = LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\sprites\\dev\\32px.png").generic_string().c_str());
-const Texture2D EntityTexture_Fox = LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\sprites\\fox\\fox_default.png").generic_string().c_str());
+Texture2D EntityTexture_Default;//= LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\sprites\\dev\\32px.png").generic_string().c_str());
+Texture2D EntityTexture_Fox;//= LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\sprites\\fox\\fox_default.png").generic_string().c_str());

@@ -5,5 +5,9 @@ C:\Users\under\source\repos\ASCPP\include\raylib.h(1541,51): warning C4190: 'Get
 C:\Users\under\source\repos\ASCPP\include\raylib.h(454,16): message : see declaration of 'BoundingBox'
 C:\Users\under\source\repos\ASCPP\include\raylib.h(1560,48): warning C4190: 'GetMeshBoundingBox' has C-linkage specified, but returns UDT 'BoundingBox' which is incompatible with C
 C:\Users\under\source\repos\ASCPP\include\raylib.h(454,16): message : see declaration of 'BoundingBox'
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(55,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(55,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(58,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(58,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(92,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   animalsim.vcxproj -> C:\Users\under\source\repos\ASCPP\x64\Debug\animalsim.exe
