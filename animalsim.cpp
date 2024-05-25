@@ -78,7 +78,7 @@ int main() // MSVC is complaining about how much stack memory I'm using WAAAH WA
 	//spriteTexture_default = LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\fop.png").generic_string().c_str());
 
 	Camera2D GameCamera = { 0 };
-	GameCamera.offset = {GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f};
+	GameCamera.offset = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
 	GameCamera.zoom = 1.0f;
 	GameCamera.rotation = 0.0f;
 	Vector2 CameraTarget = { 0, 0 };
