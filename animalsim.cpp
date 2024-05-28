@@ -22,7 +22,7 @@ Vector2 sqrdist(Vector2 x1, Vector2 x2)
 	return newVec2(sqrdist(x1.x, x2.x) , sqrdist(x1.y, x2.y));
 }
 
-// update function shit
+/*/ update function shit
 void ResolveUpdateFunctionID(Entity entity)
 {
 	/*
@@ -38,13 +38,13 @@ void ResolveUpdateFunctionID(Entity entity)
 		std::cout << "Error! unknown updateFunctionID " << entity.updatefuncid << "\n";
 		break;
 	}
-	*/
+	/
 	if (entity.updatefuncid == EntityID_Fox)
 	{
 		entity.position.x += 1;
 	}
 
-}
+}*/
 
 // use to render the entites
 void RenderEntity(Entity entity)
@@ -60,15 +60,26 @@ void RenderEntity(Entity entity)
 	}
 }
 
+void FoxUpdate(Entity ent, Entity * entities)
+{
+	int size = sizeof(entities) / sizeof(Entity);
+	int index = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+
+
+		if (index != -1)
+		{
+			
+		}
+	}
+}
+
 //main function
 //--------------------------------------------------------------------------------------//
 int main() // MSVC is complaining about how much stack memory I'm using WAAAH WAAH WAAAH
 {
-
-	const int * randomseed = new int{ 5534 };
-	srand(*randomseed);
-	delete randomseed;
-	randomseed = nullptr;
 
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "simvis");
 
@@ -86,8 +97,12 @@ int main() // MSVC is complaining about how much stack memory I'm using WAAAH WA
 
 	Vector2 mousepos; //Vector2(0, 0);
 	Entity* animals = new Entity[255];
+	srand(sizeof(animals) / sizeof(Entity));
+
+	// init animals
 	for (int i = 0; i < 255; i++)
 	{
+		animals[i].id = i;
 		animals[i].position.x = 0;
 		animals[i].position.y = 0 + i;
 		animals[i].updatefuncid = EntityID_Fox;
