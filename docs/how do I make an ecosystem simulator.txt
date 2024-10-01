@@ -1,0 +1,12 @@
+1. what does an ecosystem simulation exactly mean?
+
+2. how complex should I go with this? Do I simulate emotions? Or just a basic hunger, thirst, and want to procreate?
+
+3. what about graphics? should I use 3d rendering of all the animals and the environment? should I use a simplistic pixel art style?
+
+
+1. An ecosystem simulation, to me, means a simulation of predator prey dynamics with common animals in different settings. These settings can be things like forests, flatlands, deserts, or caves. The only requirement is the predator prey dynamics, procedural terrain, and diverse animals.
+
+2. the complexity is based on two factors to me. my interest and passion for the project, and my laptops ability to run what I'm making. my goal for this program is to make a simple and modular program so that I can easily expand on it in the future.
+
+3. I believe that I should make a modular graphics system. Well, more like a "modular" graphics system. I plan on using a sprite sheet to render the graphics that I put into the game.
