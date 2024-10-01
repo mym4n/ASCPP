@@ -1,14 +1,8 @@
 #include <iostream>
 #include <raylib.h>
 
-class Animal
+struct Genes
 {
-	bool alive;
-	Vector2 position;
-	Vector2 velocity;
-	// use size as a stand in for mass lol
-	float size;
-
 	float health;
 	float hunger;
 	float thirst;
@@ -17,6 +11,20 @@ class Animal
 	int stamina;
 	int speed;
 	int strength;
+};
+
+class Animal
+{
+	bool alive;
+	Vector2 position;
+	Vector2 velocity;
+	// use size as a stand in for mass lol
+	float size;
+
+	// pack this into here
+	// because I don't feel like
+	// specifying all this bullshit
+	Genes gene;
 
 	Texture* sprite;
 };
