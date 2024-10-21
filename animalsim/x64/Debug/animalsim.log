@@ -2,5 +2,8 @@
 C:\Users\under\source\repos\ASCPP\include\raylib.h(1431,15): warning C4190: 'ColorToHSV' has C-linkage specified, but returns UDT 'Vector3' which is incompatible with C
 C:\Users\under\source\repos\ASCPP\include\raylib.h(1541,19): warning C4190: 'GetModelBoundingBox' has C-linkage specified, but returns UDT 'BoundingBox' which is incompatible with C
 C:\Users\under\source\repos\ASCPP\include\raylib.h(1560,19): warning C4190: 'GetMeshBoundingBox' has C-linkage specified, but returns UDT 'BoundingBox' which is incompatible with C
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(135,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(135,55): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(137,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(137,107): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   animalsim.vcxproj -> C:\Users\under\source\repos\ASCPP\x64\Debug\animalsim.exe
