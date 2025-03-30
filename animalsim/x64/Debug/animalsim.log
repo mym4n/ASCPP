@@ -1,9 +1,19 @@
 ﻿  animalsim.cpp
 C:\Users\under\source\repos\ASCPP\include\raylib.h(1431,15): warning C4190: 'ColorToHSV' has C-linkage specified, but returns UDT 'Vector3' which is incompatible with C
+  (compiling source file 'animalsim.cpp')
+      C:\Users\under\source\repos\ASCPP\include\raylib.h(220,16):
+      see declaration of 'Vector3'
+  
 C:\Users\under\source\repos\ASCPP\include\raylib.h(1541,19): warning C4190: 'GetModelBoundingBox' has C-linkage specified, but returns UDT 'BoundingBox' which is incompatible with C
+  (compiling source file 'animalsim.cpp')
+      C:\Users\under\source\repos\ASCPP\include\raylib.h(454,16):
+      see declaration of 'BoundingBox'
+  
 C:\Users\under\source\repos\ASCPP\include\raylib.h(1560,19): warning C4190: 'GetMeshBoundingBox' has C-linkage specified, but returns UDT 'BoundingBox' which is incompatible with C
-C:\Users\under\source\repos\ASCPP\animalsim.cpp(135,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\under\source\repos\ASCPP\animalsim.cpp(135,55): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\under\source\repos\ASCPP\animalsim.cpp(137,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\under\source\repos\ASCPP\animalsim.cpp(137,107): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'animalsim.cpp')
+      C:\Users\under\source\repos\ASCPP\include\raylib.h(454,16):
+      see declaration of 'BoundingBox'
+  
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(22,20): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\under\source\repos\ASCPP\animalsim.cpp(22,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   animalsim.vcxproj -> C:\Users\under\source\repos\ASCPP\x64\Debug\animalsim.exe

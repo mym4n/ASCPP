@@ -1,100 +1,29 @@
-#include <iostream>
-#include <thread>
+#include <cstdio>
+#include <cstdlib>
+#include <chrono>
 #include <raylib.h>
 
-// animal related structs and classes
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-struct Genes
+enum ent_type
 {
-	float health;
-	float hunger;
-	float thirst;
-	float otherwant;
-
-	int stamina;
-	int speed;
-	int strength;
+	ent_null = 0,
+	ent_r = 1,
+	ent_g = 2,
+	ent_m = 3,
+	ent_s = 4
 };
 
-class Animal
+struct ent
 {
-public:
-	bool alive;
-	Vector2 position;
-	Vector2 velocity;
-	// use size as a stand in for mass lol
-	float size;
-
-	// pack this into here
-	// because I don't feel like
-	// specifying all this bullshit
-	Genes gene;
-
-	Texture* sprite;
+	ent_type type;
 };
 
-// simulation related functions and variables
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-int sync_code = 0; // -1 means close all threads
-bool simthread_closed = false;
-bool simthread_paused = false;
-Animal* animals;
-int sizeofanimals = 255;
-
-// DO NOT RUN THIS IF ANIMALS HAS NOT BEEN
-// INITIALIZED!! THIS IS DESIGNED TO BE RUN
-// GIVEN THAT ANIMALS IS INITIALIZED!!
-void SimulationStep()
+void render_ent(Texture master_texture_atlas, ent _ent, Vector2 position)
 {
-	// sizeofanimals = sizeof(animals) / sizeof(Animal);
+	Rectangle r = { 32*(int)_ent.type, 0, 32, 32 };
 
-	for (int i = 0; i < sizeofanimals; i++)
-	{
-		if (animals[i].alive)
-		{
-			animals[i].position.x += 1 * GetFrameTime();
-			animals[i].position.y += 1 * GetFrameTime();
-		}
-	}
-
-}
-
-void SimulationThread()
-{
-	bool makework = true;
-	float deltaTime = 0.0f;
-	while (makework)
-	{
-		deltaTime = GetFrameTime();
-		switch (sync_code)
-		{
-			case -1: // close thread
-				makework = false;
-				std::cout << "[S_THRD] closing...\n";
-				break;
-			case 1: // run sim
-				// sizeofanimals and animals are what to use
-				SimulationStep();
-				break;
-			case 2: // pause case
-				simthread_paused = true;
-				//std::cout << "[S_THRD] sim thread paused...\n";
-				while (sync_code == 2)
-				{
-					// do nothing
-				}
-				//std::cout << "[S_THRD] sim thread unpaused...\n";
-
-				break;
-		}
-
-		deltaTime = deltaTime - GetFrameTime();
-		if (deltaTime < (1/5))
-		{
-			WaitTime((1/5) - deltaTime);
-		}
-	}
-	simthread_closed = true;
+	position.y -= 16;
+	position.x -= 16;
+	DrawTextureRec(master_texture_atlas, r, position, WHITE);
 }
 
 // "render thread"
@@ -102,54 +31,45 @@ int main()
 {
 	InitWindow(1280, 720, "A.E.S.");
 
-	sync_code = 2;
-	animals = new Animal[sizeofanimals];
-	std::thread simthread(SimulationThread);
+	bool debug_mode = false;
 
-	Image animal_img = GenImageColor(32, 32, BLUE);
-	Texture animaltxt = LoadTextureFromImage(animal_img);
-	UnloadImage(animal_img);
+	Texture master_texture_atlas = LoadTexture("./x64/assets/master_texture_atlas.png");
+	int ent_count = 4;
+	Vector2* positions = (Vector2*)malloc(ent_count*sizeof(Vector2));
+	ent* ents = (ent*)malloc(ent_count*sizeof(ent));
+	// Rectangle* rectangles = (Rectangle*)malloc(ent_count*sizeof(Rectangle));
 
-	// initialize animals
-	// genes are determined
-	// on spawn
-	for (int i = 0; i < sizeofanimals; i++)
+	ents[0].type = ent_type::ent_r;
+	ents[1].type = ent_type::ent_g;
+	ents[2].type = ent_type::ent_m;
+	ents[3].type = ent_type::ent_s;
+
+	srand(44); // TODO: make this based off non repeatable state
+	for (int i = 0; i < ent_count; i++)
 	{
-		animals[i].position = { 0,0 };
-		animals[i].alive = true;
-		animals[i].size = 1.0f;
-		animals[i].sprite = &animaltxt;
-		animals[i].velocity = { 0, 0 };
+		positions[i] = { (float)GetRandomValue(0, 250), (float)GetRandomValue(0, 250)};
 	}
 
 	SetTargetFPS(60);
 	while (!WindowShouldClose())
 	{
+		// get some input why don't you
+		if (IsKeyPressed(KeyboardKey::KEY_D)) debug_mode = !debug_mode;
+
 		// begin drawing to
 		// the screen
 		BeginDrawing();
-
 		ClearBackground(BLACK);
-		for (int i = 0; i < sizeofanimals; i++)
-		{
-			DrawTexture(*animals[i].sprite, animals[i].position.x, animals[i].position.y, WHITE);
 
-			DrawText(TextFormat("x%0.1f y%0.1f", animals[i].position.x, animals[i].position.y), animals[i].position.x, animals[i].position.y, 4, WHITE);
+		for (int i = 0; i < ent_count; i++)
+		{
+			render_ent(master_texture_atlas, ents[i], positions[i]);
 		}
 
-		DrawFPS(0, 0);
+		//DrawTexture(master_texture_atlas, 0, 0, WHITE);
+		//DrawFPS(0, 0);
 		EndDrawing();
-		sync_code = 1;
 	}
-
-	sync_code = -1;
-
-	while (simthread_closed != true)
-	{
-		// do nothing
-	}
-	simthread.join();
-	UnloadTexture(animaltxt);
 
 	CloseWindow();
 }
