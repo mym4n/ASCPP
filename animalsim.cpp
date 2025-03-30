@@ -21,8 +21,8 @@ void render_ent(Texture master_texture_atlas, ent _ent, Vector2 position)
 {
 	Rectangle r = { 32*(int)_ent.type, 0, 32, 32 };
 
-	position.y -= 16;
-	position.x -= 16;
+	//position.y -= 16;
+	//position.x -= 16;
 	DrawTextureRec(master_texture_atlas, r, position, WHITE);
 }
 
@@ -39,15 +39,11 @@ int main()
 	ent* ents = (ent*)malloc(ent_count*sizeof(ent));
 	// Rectangle* rectangles = (Rectangle*)malloc(ent_count*sizeof(Rectangle));
 
-	ents[0].type = ent_type::ent_r;
-	ents[1].type = ent_type::ent_g;
-	ents[2].type = ent_type::ent_m;
-	ents[3].type = ent_type::ent_s;
-
 	srand(44); // TODO: make this based off non repeatable state
 	for (int i = 0; i < ent_count; i++)
 	{
 		positions[i] = { (float)GetRandomValue(0, 250), (float)GetRandomValue(0, 250)};
+		ents[i].type = (ent_type)GetRandomValue(0, ent_type::ent_s);
 	}
 
 	SetTargetFPS(60);
