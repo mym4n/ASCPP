@@ -14,11 +14,7 @@ C:\Users\under\source\repos\animalsim\include\raylib.h(1560,48): warning C4190: 
   C:\Users\under\source\repos\animalsim\include\raylib.h(454,16):
   see declaration of 'BoundingBox'
   
-C:\Users\under\source\repos\animalsim\animalsim.cpp(55,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\under\source\repos\animalsim\animalsim.cpp(55,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\under\source\repos\animalsim\animalsim.cpp(58,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\under\source\repos\animalsim\animalsim.cpp(58,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\under\source\repos\animalsim\animalsim.cpp(92,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  LINK : C:\Users\under\source\repos\animalsim\x64\Debug\animalsim.exe not found or not built by the last incremental link; performing full link
+C:\Users\under\source\repos\animalsim\animalsim.cpp(22,20): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\under\source\repos\animalsim\animalsim.cpp(22,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   animalsim.vcxproj -> C:\Users\under\source\repos\animalsim\x64\Debug\animalsim.exe

@@ -29,7 +29,7 @@ void render_ent(Texture master_texture_atlas, ent _ent, Vector2 position)
 // "render thread"
 int main()
 {
-	InitWindow(1280, 720, "A.E.S.");
+	InitWindow(1280, 720, "ASCPP");
 
 	bool debug_mode = false;
 
