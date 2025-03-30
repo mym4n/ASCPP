@@ -1,187 +1,75 @@
-#include <iostream>
-#include <filesystem>
+#include <cstdio>
+#include <cstdlib>
+#include <chrono>
 #include <raylib.h>
 
-#include <entity.h>
-
-#define MAXANIMAL_AMOUNT = 255
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 720
-
-float deltaTime = 1.0f;
-
-//necessary functions
-//--------------------------------------------------------------------------------------//
-float sqrdist(float x1, float x2)
+enum ent_type
 {
-	return (x2 - x1) * (x2 - x1);
+	ent_null = 0,
+	ent_r = 1,
+	ent_g = 2,
+	ent_m = 3,
+	ent_s = 4
+};
+
+struct ent
+{
+	ent_type type;
+};
+
+void render_ent(Texture master_texture_atlas, ent _ent, Vector2 position)
+{
+	Rectangle r = { 32*(int)_ent.type, 0, 32, 32 };
+
+	position.y -= 16;
+	position.x -= 16;
+	DrawTextureRec(master_texture_atlas, r, position, WHITE);
 }
 
-Vector2 sqrdist(Vector2 x1, Vector2 x2)
+// "render thread"
+int main()
 {
-	return newVec2(sqrdist(x1.x, x2.x) , sqrdist(x1.y, x2.y));
-}
+	InitWindow(1280, 720, "A.E.S.");
 
-/*/ update function shit
-void ResolveUpdateFunctionID(Entity entity)
-{
-	/*
-	switch (entity.updatefuncid)
+	bool debug_mode = false;
+
+	Texture master_texture_atlas = LoadTexture("./x64/assets/master_texture_atlas.png");
+	int ent_count = 4;
+	Vector2* positions = (Vector2*)malloc(ent_count*sizeof(Vector2));
+	ent* ents = (ent*)malloc(ent_count*sizeof(ent));
+	// Rectangle* rectangles = (Rectangle*)malloc(ent_count*sizeof(Rectangle));
+
+	ents[0].type = ent_type::ent_r;
+	ents[1].type = ent_type::ent_g;
+	ents[2].type = ent_type::ent_m;
+	ents[3].type = ent_type::ent_s;
+
+	srand(44); // TODO: make this based off non repeatable state
+	for (int i = 0; i < ent_count; i++)
 	{
-	case EntityID_Default:
-		//std::cout << "[INFO] prg called updateFunction on ID 0\n";
-		break;
-	case EntityID_Fox:
-
-		break;
-	default:
-		std::cout << "Error! unknown updateFunctionID " << entity.updatefuncid << "\n";
-		break;
-	}
-	/
-	if (entity.updatefuncid == EntityID_Fox)
-	{
-		entity.position.x += 1;
-	}
-
-}*/
-
-// use to render the entites
-void RenderEntity(Entity entity)
-{
-	switch (entity.spriteid)
-	{
-	case EntityID_Default:
-		DrawTexture(EntityTexture_Default, entity.position.x, entity.position.y, WHITE);
-		break;
-	case EntityID_Fox:
-		DrawTexture(EntityTexture_Fox, entity.position.x, entity.position.y, WHITE);
-		break;
-	}
-}
-
-void FoxUpdate(Entity ent, Entity * entities)
-{
-	int size = sizeof(entities) / sizeof(Entity);
-	int index = 0;
-
-	for (int i = 0; i < size; i++)
-	{
-
-
-		if (index != -1)
-		{
-			
-		}
-	}
-}
-
-//main function
-//--------------------------------------------------------------------------------------//
-int main() // MSVC is complaining about how much stack memory I'm using WAAAH WAAH WAAAH
-{
-
-	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "simvis");
-
-	// load all textures
-	EntityTexture_Default = LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\sprites\\dev\\32px.png").generic_string().c_str());
-	EntityTexture_Fox = LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\sprites\\fox\\fox_default.png").generic_string().c_str());
-	//spriteTexture_default = LoadTexture(std::filesystem::absolute(".\\x64\\Assets\\fop.png").generic_string().c_str());
-
-	Camera2D GameCamera = { 0 };
-	GameCamera.offset = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
-	GameCamera.zoom = 1.0f;
-	GameCamera.rotation = 0.0f;
-	Vector2 CameraTarget = { 0, 0 };
-	float zoomMul = 1.0f;
-
-	Vector2 mousepos; //Vector2(0, 0);
-	Entity* animals = new Entity[255];
-	srand(sizeof(animals) / sizeof(Entity));
-
-	// init animals
-	for (int i = 0; i < 255; i++)
-	{
-		animals[i].id = i;
-		animals[i].position.x = 0;
-		animals[i].position.y = 0 + i;
-		animals[i].updatefuncid = EntityID_Fox;
-		animals[i].spriteid = EntityID_Fox;
+		positions[i] = { (float)GetRandomValue(0, 250), (float)GetRandomValue(0, 250)};
 	}
 
 	SetTargetFPS(60);
-
 	while (!WindowShouldClose())
 	{
-		// assign mouse position
-		mousepos = GetMousePosition();
+		// get some input why don't you
+		if (IsKeyPressed(KeyboardKey::KEY_D)) debug_mode = !debug_mode;
 
-		// update animals
-		for (int i = 0; i < 255; i++)
-		{
-			switch (animals[i].updatefuncid)
-			{
-				case EntityID_Default:
-					break;
-				case EntityID_Fox:
-					animals[i].position.x += 1;
-					break;
-			}
-		}
-
-		// camera Processing
-		if (IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_LEFT_SHIFT)) zoomMul = 1.0f;
-		if (IsKeyUp(KEY_LEFT_SHIFT) || IsKeyUp(KEY_LEFT_SHIFT)) zoomMul = 0.1f;
-
-		if (IsKeyDown(KEY_W)) CameraTarget.y -= 1.0;
-		if (IsKeyDown(KEY_S)) CameraTarget.y += 1.0;
-		if (IsKeyDown(KEY_A)) CameraTarget.x -= 1.0;
-		if (IsKeyDown(KEY_D)) CameraTarget.x += 1.0;
-
-		if (IsKeyDown(KEY_EQUAL)) GameCamera.zoom += 1.0f * zoomMul;
-		if (IsKeyDown(KEY_MINUS)) GameCamera.zoom -= 1.0f * zoomMul;
-		if (IsKeyPressed(KEY_P)) std::cout << GameCamera.zoom << " zoom\n";
-		if (IsKeyPressed(KEY_ZERO)) GameCamera.zoom = 1;
-
-		if (GameCamera.zoom <= 0) GameCamera.zoom = 0.1f;
-		if (GameCamera.zoom >= 16) GameCamera.zoom = 16.0f;
-
-		GameCamera.target = CameraTarget;
-
-		// begin drawing to the window
+		// begin drawing to
+		// the screen
 		BeginDrawing();
 		ClearBackground(BLACK);
 
-			// render to camera
-			BeginMode2D(GameCamera);
+		for (int i = 0; i < ent_count; i++)
+		{
+			render_ent(master_texture_atlas, ents[i], positions[i]);
+		}
 
-			// not rendering for some reason??
-			//RenderEntities(&animals);
-
-			DrawRectangle(0, 0, 255, 255, RED);
-
-			for (int i = 0; i < 255; i++)
-			{
-				//DrawTexture(EntityTexture_Fox, animals[i].position.x, animals[i].position.y, WHITE);
-				RenderEntity(animals[i]);
-			}
-
-			EndMode2D();
-
-		// draw a circle on the mouse
-		DrawCircle(GetMouseX(), GetMouseY(), 3, RED);
-
-		DrawText(TextFormat("Camera Pos: x:%02.01f, y:%02.01f", GameCamera.target.x, GameCamera.target.y), 4, 4, 10, WHITE);
-		DrawText(TextFormat("Camera Zoom:%02.01f", GameCamera.zoom), 4, 17, 10, WHITE);
-
-		//DrawFPS(4, 4);
+		//DrawTexture(master_texture_atlas, 0, 0, WHITE);
+		//DrawFPS(0, 0);
 		EndDrawing();
-
-		// update the deltaTime
-		deltaTime = GetFrameTime();
 	}
-
-	delete[] animals;
 
 	CloseWindow();
 }
